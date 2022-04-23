@@ -1,0 +1,30 @@
+{
+  "root": true,
+  "env": {
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": "latest"
+  },
+  "plugins": ["prettier", "@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "prettier",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "no-console": "off",
+    "no-unused-vars": "error",
+    "prettier/prettier": "error"
+  },
+  "overrides": [
+    {
+      "files": ["*.test.ts"],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
+}
