@@ -1,11 +1,14 @@
 import parseDuration from 'parse-duration';
+import { time24hRegex, time12hRegex } from './constants';
 
-export function parseArgs(args: string[]): {
-  time: string | undefined;
-  delay: string | undefined;
+export interface ParsedArgs {
   message: string | undefined;
+  time?: string;
+  delay?: string;
   repeat: boolean;
-} {
+}
+
+export function parseArgs(args: string[]): ParsedArgs {
   const argsSet = new Set(args.map((arg) => arg.trim()));
   let repeat = false;
 
@@ -17,11 +20,6 @@ export function parseArgs(args: string[]): {
   }
 
   let time, delay;
-
-  const time24hRegex = new RegExp(/^([01]\d|2[0-3]):([0-5]\d)$/);
-  const time12hRegex = new RegExp(
-    /^(0?[0-9]|1[012]):[0-5][0-9] ?((a|p|A|P)m|(a|p|A|P)M)$/
-  );
 
   // Check if any of the arguments is in time or duration format
   for (const arg of argsSet) {
