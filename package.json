@@ -9,7 +9,8 @@
     "node": "^14.13.1 || >=16.0.0"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage src",
+    "test:watch": "jest src --watch",
     "prepare": "husky install",
     "build": "tsup ./src --format esm --target es2022 --clean",
     "dev": "tsup ./src --format esm --target es2022 --clean --watch ./src --onSuccess 'node dist/index.js'"
