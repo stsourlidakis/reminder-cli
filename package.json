@@ -1,10 +1,10 @@
 {
-  "name": "node-template",
+  "name": "reminder-cli",
   "version": "0.0.0",
-  "description": "NodeJS package template",
+  "description": "Schedule desktop notifications for your future self ⏰",
   "author": "Stavros Tsourlidakis <s.tsourlidakis@hotmail.com>",
   "type": "module",
-  "exports": "./index.js",
+  "exports": "./dist/index.js",
   "engines": {
     "node": "^14.13.1 || >=16.0.0"
   },
@@ -14,6 +14,23 @@
     "build": "tsup ./src --format esm --target es2022 --clean",
     "dev": "tsup ./src --format esm --target es2022 --clean --watch ./src --onSuccess 'node dist/index.js'"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stsourlidakis/reminder-cli.git"
+  },
+  "keywords": [
+    "cli",
+    "schedule",
+    "reminder",
+    "reminders",
+    "task",
+    "desktop",
+    "notification"
+  ],
+  "bugs": {
+    "url": "https://github.com/stsourlidakis/reminder-cli/issues"
+  },
+  "homepage": "https://github.com/stsourlidakis/reminder-cli#readme",
   "license": "MIT",
   "devDependencies": {
     "@commitlint/cli": "^16.2.3",

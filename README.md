@@ -1,13 +1,7 @@
-# node-template
+# reminder-cli
 
-A template repo to quickstart NodeJS projects
+Schedule desktop notifications for your future self ⏰
 
-## Includes
+## License
 
-- Git hooks with [Husky](https://typicode.github.io/husky)
-  - Enforcing [Conventional Commits](https://www.conventionalcommits.org)
-  - Lint staged files before commits with [lint-staged](https://github.com/okonet/lint-staged)
-- Code linting with [ESLint](https://eslint.org/)
-- Code formatting with [Prettier](https://prettier.io/)
-- TypeScript support
-- Tests with (Jest)[https://jestjs.io]
+MIT
