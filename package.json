@@ -12,8 +12,8 @@
     "test": "jest --coverage src",
     "test:watch": "jest src --watch",
     "prepare": "husky install",
-    "build": "tsup ./src --format esm --target es2022 --clean",
-    "dev": "tsup ./src --format esm --target es2022 --clean --watch ./src --onSuccess 'node dist/index.js'"
+    "build": "tsup ./src/index.ts --format esm --target es2022 --clean",
+    "dev": "tsup ./src/index.ts --format esm --target es2022 --clean --watch ./src --onSuccess 'node dist/index.js'"
   },
   "repository": {
     "type": "git",
@@ -49,5 +49,8 @@
     "ts-jest": "^27.1.4",
     "tsup": "^5.12.6",
     "typescript": "^4.6.3"
+  },
+  "dependencies": {
+    "parse-duration": "^1.0.2"
   }
 }
