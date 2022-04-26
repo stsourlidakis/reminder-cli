@@ -5,7 +5,21 @@ import {
   noPastTimeErrorMessage,
 } from './constants';
 
-// Edge case: some tests will fail if they are executed on 23:59 local time
+const now = new Date();
+const pastTime24hFormattted = getHHMM(now, false);
+const pastTime12hFormattted = getHHMM(now, true);
+
+// Edge case: Some test will fail at 23:59 local time
+
+const futureTime24hFormattted = '23:59';
+
+function getHHMM(d: Date, hour12 = false): string {
+  return d.toLocaleString('en-GB', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12,
+  });
+}
 
 describe('Accepts valid argument combinations', () => {
   test('Delay with/without repeat is valid', async () => {
@@ -29,7 +43,7 @@ describe('Accepts valid argument combinations', () => {
   test('Time with/without repeat is valid', async () => {
     expect(
       validateArgs({
-        time: '23:59',
+        time: futureTime24hFormattted,
         message: 'foo',
         repeat: false,
       })
@@ -37,7 +51,7 @@ describe('Accepts valid argument combinations', () => {
 
     expect(
       validateArgs({
-        time: '23:59',
+        time: futureTime24hFormattted,
         message: 'foo',
         repeat: true,
       })
@@ -81,7 +95,7 @@ describe('Rejects invalid argument combinations', () => {
 
     expect(() =>
       validateArgs({
-        time: '23:59',
+        time: futureTime24hFormattted,
         message: undefined,
         repeat: false,
       })
@@ -89,7 +103,7 @@ describe('Rejects invalid argument combinations', () => {
 
     expect(() =>
       validateArgs({
-        time: '23:59',
+        time: futureTime24hFormattted,
         message: undefined,
         repeat: true,
       })
@@ -98,21 +112,9 @@ describe('Rejects invalid argument combinations', () => {
 });
 
 describe('Rejects time in the past', () => {
-  const aMinuteAgo = new Date(new Date().getTime() - 60 * 1000);
-  const aMinuteAgo24h = aMinuteAgo.toLocaleString('en-GB', {
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: false,
-  });
-  const aMinuteAgo12h = aMinuteAgo.toLocaleString('en-GB', {
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: true,
-  });
-
   expect(() =>
     validateArgs({
-      time: aMinuteAgo24h,
+      time: pastTime24hFormattted,
       message: 'foo',
       repeat: false,
     })
@@ -120,7 +122,7 @@ describe('Rejects time in the past', () => {
 
   expect(() =>
     validateArgs({
-      time: aMinuteAgo12h,
+      time: pastTime12hFormattted,
       message: 'foo',
       repeat: false,
     })

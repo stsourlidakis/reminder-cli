@@ -12,9 +12,11 @@ export function getTodayDateFromTime(time: string): Date {
   }
 
   const todayDateString = new Date()
-    .toLocaleString()
-    .split(' ')[0]
-    .replace(/-/g, '/');
+    .toLocaleString('en-GB') // Formats local datetime to en-GB
+    .split(',')[0]
+    .split('/')
+    .reverse()
+    .join('/');
 
   return new Date(`${todayDateString} ${time}`);
 }
