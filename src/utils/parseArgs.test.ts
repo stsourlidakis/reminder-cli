@@ -1,37 +1,37 @@
 import { parseArgs } from './parseArgs';
 
 describe('Handles the repeat flag', () => {
-  test('Long "--repeat"', async () => {
+  test('Long "--repeat"', () => {
     expect(parseArgs(['foo', 'bar']).repeat).toBe(false);
     expect(parseArgs(['foo', 'bar', '--repeat']).repeat).toBe(true);
   });
 
-  test('Shorthand "-r"', async () => {
+  test('Shorthand "-r"', () => {
     expect(parseArgs(['foo', 'bar']).repeat).toBe(false);
     expect(parseArgs(['foo', 'bar', '-r']).repeat).toBe(true);
   });
 });
 
 describe('Finds the delay argument', () => {
-  test('Single', async () => {
+  test('Single', () => {
     expect(parseArgs(['1h', 'foo']).delay).toBe('1h');
     expect(parseArgs(['10m', 'foo']).delay).toBe('10m');
     expect(parseArgs(['10 m', 'foo']).delay).toBe('10 m');
   });
 
-  test('Multiple', async () => {
+  test('Multiple', () => {
     expect(parseArgs(['1h', 'foo']).delay).toBe('1h');
     expect(parseArgs(['1h30m', 'foo']).delay).toBe('1h30m');
     expect(parseArgs(['1h 30m', 'foo']).delay).toBe('1h 30m');
   });
 
-  test('Only cares about the first time-like argument', async () => {
+  test('Only cares about the first time-like argument', () => {
     expect(parseArgs(['1h', 'foo', '3h']).delay).toBe('1h');
   });
 });
 
 describe('Finds the time argument', () => {
-  test('24h format', async () => {
+  test('24h format', () => {
     expect(parseArgs(['13:37', 'foo']).time).toBe('13:37');
     expect(parseArgs(['23:33', 'foo']).time).toBe('23:33');
 
@@ -42,7 +42,7 @@ describe('Finds the time argument', () => {
     expect(parseArgs(['13:3 7', 'foo']).time).toBe(undefined);
   });
 
-  test('12h format', async () => {
+  test('12h format', () => {
     expect(parseArgs(['11:37pm', 'foo']).time).toBe('11:37pm');
     expect(parseArgs(['11:37PM', 'foo']).time).toBe('11:37PM');
     expect(parseArgs(['11:37 Pm', 'foo']).time).toBe('11:37 Pm');
@@ -64,19 +64,19 @@ describe('Finds the time argument', () => {
     expect(parseArgs(['04:60 am', 'foo']).time).toBe(undefined);
   });
 
-  test('Only cares about the first time-like argument', async () => {
+  test('Only cares about the first time-like argument', () => {
     expect(parseArgs(['13:37', 'foo', '11:55']).time).toBe('13:37');
   });
 });
 
 describe('Time vs Delay', () => {
-  test('Picks one of the two', async () => {
+  test('Picks one of the two', () => {
     const res1 = parseArgs(['13:37', '1h']);
     expect(res1.time).toBe('13:37');
     expect(res1.delay).toBe(undefined);
   });
 
-  test('Argument order matters', async () => {
+  test('Argument order matters', () => {
     const res1 = parseArgs(['1h', '13:37']);
     expect(res1.delay).toBe('1h');
     expect(res1.time).toBe(undefined);
@@ -84,12 +84,12 @@ describe('Time vs Delay', () => {
 });
 
 describe('Finds the message argument(s)', () => {
-  test('Single argument', async () => {
+  test('Single argument', () => {
     expect(parseArgs(['13:37', 'foo']).message).toBe('foo');
     expect(parseArgs(['13:37', 'foo bar']).message).toBe('foo bar');
   });
 
-  test('Multiple arguments', async () => {
+  test('Multiple arguments', () => {
     expect(parseArgs(['13:37', 'foo', 'bar']).message).toBe('foo bar');
     expect(parseArgs(['foo', '13:37', 'bar']).message).toBe('foo bar');
     expect(
@@ -99,7 +99,7 @@ describe('Finds the message argument(s)', () => {
 });
 
 describe('Everything works together', () => {
-  test("Order doesn't matter", async () => {
+  test("Order doesn't matter", () => {
     expect(parseArgs(['13:37', 'foo'])).toMatchObject({
       time: '13:37',
       message: 'foo',
@@ -132,7 +132,7 @@ describe('Everything works together', () => {
     });
   });
 
-  test('All arguments are trimmed', async () => {
+  test('All arguments are trimmed', () => {
     expect(
       parseArgs([' 13:37    ', '   foo bar 21:15  ', '   --repeat  '])
     ).toMatchObject({

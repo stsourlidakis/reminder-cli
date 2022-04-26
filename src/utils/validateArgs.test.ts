@@ -22,7 +22,7 @@ function getHHMM(d: Date, hour12 = false): string {
 }
 
 describe('Accepts valid argument combinations', () => {
-  test('Delay with/without repeat is valid', async () => {
+  test('Delay with/without repeat is valid', () => {
     expect(
       validateArgs({
         delay: '1h',
@@ -40,7 +40,7 @@ describe('Accepts valid argument combinations', () => {
     ).toBe(true);
   });
 
-  test('Time with/without repeat is valid', async () => {
+  test('Time with/without repeat is valid', () => {
     expect(
       validateArgs({
         time: futureTime24hFormattted,
@@ -60,7 +60,7 @@ describe('Accepts valid argument combinations', () => {
 });
 
 describe('Rejects invalid argument combinations', () => {
-  test('No time or delay returns an error', async () => {
+  test('No time or delay returns an error', () => {
     expect(() =>
       validateArgs({
         message: 'foo',
@@ -76,7 +76,7 @@ describe('Rejects invalid argument combinations', () => {
     ).toThrow(noDelayOrTimeErrorMessage);
   });
 
-  test('No message returns an error', async () => {
+  test('No message returns an error', () => {
     expect(() =>
       validateArgs({
         delay: '1h',
