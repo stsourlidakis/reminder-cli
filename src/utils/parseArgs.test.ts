@@ -28,6 +28,10 @@ describe('Finds the delay argument', () => {
   test('Only cares about the first time-like argument', () => {
     expect(parseArgs(['1h', 'foo', '3h']).delay).toBe('1h');
   });
+
+  test('Noisy duration-like strings get deprioritized', () => {
+    expect(parseArgs(['foo1h', 'foo', '3h']).delay).toBe('3h');
+  });
 });
 
 describe('Finds the time argument', () => {
